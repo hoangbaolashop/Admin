@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+@import url("https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-icons.css");
+@import url("https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-svg.css");
+@import url("https://kit.fontawesome.com/42d5adcbca.js");
+
+.ngon-tay {
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.txt-kieu-chu {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  color: navy;
+}
