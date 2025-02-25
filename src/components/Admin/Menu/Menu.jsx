@@ -150,7 +150,7 @@ const MenuLeft = () => {
                       <i className="ni ni-single-02 text-dark text-sm opacity-10" />
                     </div> */}
                     <IoLogoAppleAppstore size={22} style={{color: "green"}} /> &nbsp;&nbsp;&nbsp;
-                    <a href="https://shopbandodientu.dokhactu.site/" target='_blank'>
+                    <a href="https://www.tigarboardgame.com/" target='_blank'>
                     <span className="nav-link-text ms-1" style={{color: "green"}}>Đi tới trang chủ bán hàng </span>
                     </a>
                   </a>
