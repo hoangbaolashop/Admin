@@ -10,7 +10,8 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { createProduct, updateProduct } from '../../../services/productAPI'
 import { v4 as uuidv4 } from 'uuid';
-
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css"; // Import CSS giao diện
 const Update = (props) => {
 
     const {
@@ -36,6 +37,43 @@ const Update = (props) => {
 
     const [limitedPrice, setLimitedPrice] = useState(0);
     const [limitedQuantity, setLimitedQuantity] = useState(0);
+
+     // Định nghĩa các module đầy đủ chức năng
+     const modules = {
+        toolbar: [
+        [{ header: [1, 2, 3, 4, 5, 6, false] }], // Kích thước tiêu đề
+        ["bold", "italic", "underline", "strike"], // Định dạng chữ
+        [{ color: [] }, { background: [] }], // Màu chữ và màu nền
+        [{ script: "sub" }, { script: "super" }], // Chỉ số trên/dưới
+        ["blockquote", "code-block"], // Khối trích dẫn, mã
+        [{ list: "ordered" }, { list: "bullet" }], // Danh sách số/bullet
+        [{ indent: "-1" }, { indent: "+1" }], // Thụt lề
+        [{ align: [] }], // Căn chỉnh
+        ["link", "image", "video"], // Chèn liên kết, ảnh, video
+        ["clean"], // Xóa định dạng
+        ],
+    };
+
+    // Các định dạng được hỗ trợ
+    const formats = [
+        "header",
+        "bold",
+        "italic",
+        "underline",
+        "strike",
+        "color",
+        "background",
+        "script",
+        "blockquote",
+        "code-block",
+        "list",
+        "bullet",
+        "indent",
+        "align",
+        "link",
+        "image",
+        "video",
+    ];
 
     // const OPTIONS = ['0', '5', '10', '15', '20', '25', ];
     const OPTIONS = [];
@@ -105,10 +143,10 @@ const Update = (props) => {
             } else {
                 setAvailableCategories([]); // Nếu không có hãng sản xuất tương ứng, reset thể loại
             }
-            if (editorRef.current) {
-                editorRef.current.setData(dataUpdateDoctor.MoTa || ''); // Set giá trị cho CKEditor
-                editorRef.current.setData(dataUpdateDoctor.MoTaChiTiet || ''); // Set giá trị cho CKEditor
-            }
+            // if (editorRef.current) {
+            //     editorRef.current.setData(dataUpdateDoctor.MoTa || ''); // Set giá trị cho CKEditor
+            //     editorRef.current.setData(dataUpdateDoctor.MoTaChiTiet || ''); // Set giá trị cho CKEditor
+            // }
         }
         return () => {
             form.resetFields();
@@ -740,7 +778,14 @@ const Update = (props) => {
                                 },                                        
                             ]}                                
                         >
-                            <CKEditor
+                            <ReactQuill
+                                theme="snow"                            
+                                modules={modules} // Gắn modules đầy đủ
+                                formats={formats} // Gắn các định dạng
+                                placeholder="mô tả..."
+                                style={{ height: "200px" }} // Tùy chỉnh chiều cao editor
+                            />
+                            {/* <CKEditor
                                 editor={ClassicEditor}                                        
                                 config={{
                                     toolbar: [
@@ -765,7 +810,7 @@ const Update = (props) => {
                                 onInit={(editor) => {
                                     editorRef.current = editor; // Gán ref khi CKEditor khởi tạo
                                 }}
-                            />
+                            /> */}
                         </Form.Item>
                     </Col>
                                                    
@@ -781,7 +826,14 @@ const Update = (props) => {
                                 },                                        
                             ]}                                
                         >
-                            <CKEditor
+                             <ReactQuill
+                                theme="snow"                            
+                                modules={modules} // Gắn modules đầy đủ
+                                formats={formats} // Gắn các định dạng
+                                placeholder="mô tả chi tiết"
+                                style={{ height: "200px" }} // Tùy chỉnh chiều cao editor
+                            />
+                            {/* <CKEditor
                                 editor={ClassicEditor}                                        
                                 config={{
                                     toolbar: [
@@ -806,7 +858,7 @@ const Update = (props) => {
                                 onInit={(editor) => {
                                     editorRef.current = editor; // Gán ref khi CKEditor khởi tạo
                                 }}
-                            />
+                            /> */}
                         </Form.Item>
                     </Col>
                 </Row>

@@ -10,6 +10,8 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { createProduct } from '../../../services/productAPI'
 import { fetchListHangSX } from '../../../redux/HangSX/hangSXSlice'
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css"; // Import CSS giao diện
 const Create = (props) => {
 
     const {
@@ -78,6 +80,42 @@ const Create = (props) => {
         }
     };
     
+     // Định nghĩa các module đầy đủ chức năng
+     const modules = {
+        toolbar: [
+        [{ header: [1, 2, 3, 4, 5, 6, false] }], // Kích thước tiêu đề
+        ["bold", "italic", "underline", "strike"], // Định dạng chữ
+        [{ color: [] }, { background: [] }], // Màu chữ và màu nền
+        [{ script: "sub" }, { script: "super" }], // Chỉ số trên/dưới
+        ["blockquote", "code-block"], // Khối trích dẫn, mã
+        [{ list: "ordered" }, { list: "bullet" }], // Danh sách số/bullet
+        [{ indent: "-1" }, { indent: "+1" }], // Thụt lề
+        [{ align: [] }], // Căn chỉnh
+        ["link", "image", "video"], // Chèn liên kết, ảnh, video
+        ["clean"], // Xóa định dạng
+        ],
+    };
+
+    // Các định dạng được hỗ trợ
+    const formats = [
+        "header",
+        "bold",
+        "italic",
+        "underline",
+        "strike",
+        "color",
+        "background",
+        "script",
+        "blockquote",
+        "code-block",
+        "list",
+        "bullet",
+        "indent",
+        "align",
+        "link",
+        "image",
+        "video",
+    ];
 
     const handleCreateSP = async (values) => {
         let {TenSP, IdHangSX, IdLoaiSP, sizes, Image, ImageSlider, MoTa, MoTaChiTiet, GiamGiaSP, urlYoutube} = values
@@ -601,7 +639,7 @@ const Create = (props) => {
                                 },                                        
                             ]}                                
                         >
-                            <CKEditor
+                            {/* <CKEditor
                                 editor={ClassicEditor}                                        
                                 config={{
                                     toolbar: [
@@ -622,6 +660,13 @@ const Create = (props) => {
                                     form.setFieldsValue({ MoTa: data }); // Cập nhật giá trị cho form
                                     console.log({ data }); // Lấy dữ liệu khi có thay đổi
                                 }}
+                            /> */}
+                            <ReactQuill
+                                theme="snow"                            
+                                modules={modules} // Gắn modules đầy đủ
+                                formats={formats} // Gắn các định dạng
+                                placeholder="mô tả"
+                                style={{ height: "200px" }} // Tùy chỉnh chiều cao editor
                             />
                         </Form.Item>
                     </Col>
@@ -638,7 +683,7 @@ const Create = (props) => {
                                 },                                        
                             ]}                                
                         >
-                            <CKEditor
+                            {/* <CKEditor
                                 editor={ClassicEditor}                                        
                                 config={{
                                     toolbar: [
@@ -659,6 +704,13 @@ const Create = (props) => {
                                     form.setFieldsValue({ MoTaChiTiet: data }); // Cập nhật giá trị cho form
                                     console.log({ data }); // Lấy dữ liệu khi có thay đổi
                                 }}
+                            /> */}
+                            <ReactQuill
+                                theme="snow"                            
+                                modules={modules} // Gắn modules đầy đủ
+                                formats={formats} // Gắn các định dạng
+                                placeholder="mô tả chi tiết"
+                                style={{ height: "200px" }} // Tùy chỉnh chiều cao editor
                             />
                         </Form.Item>
                     </Col>
