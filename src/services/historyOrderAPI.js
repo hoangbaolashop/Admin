@@ -10,10 +10,10 @@ export const deleteAOrderHistory= (id) => {
     return axios.delete(URL_BACKEND)
 }
 
-export const updateOrder= (_id, TinhTrangDonHang, TinhTrangThanhToan) => {
+export const updateOrder= (_id, TinhTrangDonHang, TinhTrangThanhToan, urlTTGH) => {
     const URL_BACKEND = `/api/order/update-order`    
     let data = {
-        _id, TinhTrangDonHang, TinhTrangThanhToan
+        _id, TinhTrangDonHang, TinhTrangThanhToan, urlTTGH
     }
     return axios.put(URL_BACKEND, data)
 }

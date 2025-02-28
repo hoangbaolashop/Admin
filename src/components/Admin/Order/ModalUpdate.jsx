@@ -1,7 +1,7 @@
 import { Col, Divider, Form, Input, message, Modal, notification, Row, Select } from "antd"
 import { useEffect, useState } from "react";
 import { updateOrder } from "../../../services/historyOrderAPI";
-
+import './css.css'
 const ModalUpdate = (props) => {
 
     const {
@@ -22,6 +22,7 @@ const ModalUpdate = (props) => {
                 _id: dataUpdateOrder?._id,
                 TinhTrangDonHang: dataUpdateOrder?.TinhTrangDonHang,                
                 TinhTrangThanhToan: dataUpdateOrder?.TinhTrangThanhToan,                
+                urlTTGH: dataUpdateOrder?.urlTTGH,                
             }
             console.log("init: ", init);            
             form.setFieldsValue(init);            
@@ -41,10 +42,10 @@ const ModalUpdate = (props) => {
 
     const handleUpdateOrder = async (values) => {
 
-        const { _id, TinhTrangDonHang, TinhTrangThanhToan} = values       
+        const { _id, TinhTrangDonHang, TinhTrangThanhToan, urlTTGH} = values       
         
         setIsSubmit(true)
-        const res = await updateOrder( _id, TinhTrangDonHang, TinhTrangThanhToan)
+        const res = await updateOrder( _id, TinhTrangDonHang, TinhTrangThanhToan, urlTTGH)
         if(res && res.data){
             message.success(res.message);
             handleCancel()           
@@ -179,6 +180,22 @@ const ModalUpdate = (props) => {
                                 return option.label.toLowerCase().includes(input.toLowerCase()); // Tìm kiếm trong 'label' của từng option
                             }}  
                         />
+                    </Form.Item>
+                </Col>
+                <Col span={24} md={24} sm={24} xs={24}>
+                    <Form.Item
+                        hasFeedback
+                        layout="vertical"
+                        label="Link tình trạng giao hàng (nếu có)"
+                        name="urlTTGH"
+                        rules={[
+                            {
+                                required: false,
+                                message: 'Vui lòng nhập đầy đủ thông tin!',
+                            },
+                        ]}
+                    >
+                        <Input placeholder="Nhập link tình trạng giao hàng..." />
                     </Form.Item>
                 </Col>
             </Row>

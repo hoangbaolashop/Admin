@@ -73,6 +73,7 @@ const DrawerOrder = (props) => {
                 <span style={{fontSize: "18px"}}>Số điện thoại nhận hàng: <span style={{color: "navy"}}>{dataDetailOrder?.phone}</span></span> <br/>
                 <span style={{fontSize: "18px"}}>Địa chỉ giao hàng: <span style={{color: "navy"}}>{dataDetailOrder?.address}</span></span> <br/>
                 <span style={{fontSize: "18px"}}>Ngày đặt: <span style={{color: "navy"}}>{moment(dataDetailOrder?.createdAt).tz('Asia/Ho_Chi_Minh').format('DD-MM-YYYY (HH:mm:ss)')}</span></span> <br/>
+                <span style={{fontSize: "18px"}}>Link tình trạng giao hàng: <span style={{color: "navy"}}>{dataDetailOrder?.urlTTGH}</span></span> <br/>
             </Col>
         </Row>
         <br/>
