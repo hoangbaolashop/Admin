@@ -13,6 +13,7 @@ import HistoryCart from "./pages/admin/historyCart";
 import NhanVienPage from "./pages/admin/nhanvien";
 import HopQua from "./pages/admin/hopQua";
 import CauHoi from "./pages/admin/cauhoi";
+import ThueGameVaLienHe from "./pages/admin/thueGameVaLienHe";
 
 export default function App() {
 
@@ -91,6 +92,14 @@ export default function App() {
           element: 
           <ProtectedRoute>
             <CauHoi />
+          </ProtectedRoute>
+          
+        }, 
+        {
+          path: "thuegamevalienhe",
+          element: 
+          <ProtectedRoute>
+            <ThueGameVaLienHe />
           </ProtectedRoute>
           
         },  
