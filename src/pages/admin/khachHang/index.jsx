@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import NavbarTop from "../../../components/Admin/Navbar/NavbarTop"
 import { fetchAllVoucher } from "../../../services/voucherAPI"
 import { deleteAccKH, fetchAllAccKH, khoaAccKH } from "../../../services/accKhAPI"
-import { Button, Col, message, notification, Pagination, Popconfirm, Row, Space, Switch, Table, Tag } from "antd"
+import { Button, Col, message, notification, Pagination, Popconfirm, Row, Select, Space, Switch, Table, Tag } from "antd"
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
 import Update from "../../../components/Admin/KhachHang/Update"
 
@@ -20,6 +20,7 @@ const KhachHangPage = () => {
     const [totalAccKH, setTotalAccKH] = useState(0);
     const [currentAccKH, setCurrentAccKH] = useState(1)
     const [pageSizeAccKH, setPageSizeAccKH] = useState(5)
+    const [selectedHangTV, setSelectedHangTV] = useState([])
 
     // dùng để search 
     const [fullName, setFullName] = useState('');
@@ -30,7 +31,7 @@ const KhachHangPage = () => {
 
     useEffect(() => {
         fetchListAccKH()
-    }, [currentAccKH, pageSizeAccKH, fullName])
+    }, [currentAccKH, pageSizeAccKH, fullName, selectedHangTV])
 
 
     const fetchListVoucher = async () => {
@@ -50,7 +51,10 @@ const KhachHangPage = () => {
         // Thêm tham số tìm kiếm vào query nếu có
         if (fullName) {
             query += `&fullName=${encodeURIComponent(fullName)}`;
-        }        
+        }   
+        if (selectedHangTV) {
+            query += `&hangTV=${encodeURIComponent(selectedHangTV)}`;
+        }       
     
         const res = await fetchAllAccKH(query)
         if (res && res.data) {
@@ -234,7 +238,9 @@ const KhachHangPage = () => {
         }
     };
 
-    
+    const onChangeTheoLoaiTV = (value) => {
+        setSelectedHangTV(value)
+    }
     return (
         <div className="row mt-4">
             <NavbarTop 
@@ -246,7 +252,24 @@ const KhachHangPage = () => {
                 <div className="card z-index-2 h-100">
                 <div className="card-header pb-0 pt-3 bg-transparent" style={{display: "flex", justifyContent: "space-between"}}>
                     <h6>Danh sách tài khoản khách hàng</h6>
-                    <h5></h5>
+                    <Select
+                        showSearch
+                        placeholder="Lọc theo hạng thành viên"
+                        value={selectedHangTV}
+                        onChange={(e) => onChangeTheoLoaiTV(e)}
+                        style={{
+                            width: '300px',
+                        }}
+                        options={[
+                            { label: 'Bạc', value: 'Bạc' },                                                     
+                            { label: 'Vàng', value: 'Vàng' },                                                     
+                            { label: 'Bạch Kim', value: 'Bạch Kim' },                                                     
+                            { label: 'Kim Cương', value: 'Kim Cương' },                                                     
+                        ]}
+                        filterOption={(input, option) => {
+                            return option.label.toLowerCase().includes(input.toLowerCase()); // Tìm kiếm trong 'label' của từng option
+                        }}  
+                    /> 
                 </div>
                 <div className="card-body p-3">
                     <div className="chart">
