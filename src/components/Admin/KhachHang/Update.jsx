@@ -1,11 +1,10 @@
 import { Col, Divider, Form, Input, InputNumber, message, Modal, notification, Row, Select, Upload } from "antd";
 import { useEffect, useState } from "react";
 import './style.scss'
-import { useDispatch, useSelector } from "react-redux";
-import { fetchListCategory } from "../../../redux/TheLoai/theLoaiSlice";
-import { updateHangSX } from "../../../services/hangSXAPI";
 import { fetchAllVoucher } from "../../../services/voucherAPI";
 import { updateAccKH } from "../../../services/accKhAPI";
+import { IoDiamondSharp } from "react-icons/io5";
+import { FaCrown, FaStar, FaTrophy } from "react-icons/fa";
 const Update = (props) => {
 
     const {
@@ -50,7 +49,10 @@ const Update = (props) => {
                 email: dataUpdateAccKH.email,                                                     
                 fullName: dataUpdateAccKH.fullName,                                                     
                 phone: dataUpdateAccKH.phone,                                                     
-                quayMayManCount: dataUpdateAccKH.quayMayManCount,                                                     
+                quayMayManCount: dataUpdateAccKH.quayMayManCountc || 0,                                                     
+                hangTV: ["Bạc", "Vàng", "Bạch Kim", "Kim Cương"].includes(dataUpdateAccKH.hangTV) 
+                ? dataUpdateAccKH.hangTV 
+                : "Bạc", // Giá trị mặc định nếu không hợp lệ                                             
                 IdVoucher: dataUpdateAccKH.IdVoucher.map(item => item._id)
             }
             console.log("init: ", init);
@@ -68,13 +70,13 @@ const Update = (props) => {
 
     const handleUpdateAccKH = async (values) => {
 
-        const { id, fullName, IdVoucher, quayMayManCount} = values
+        const { id, fullName, IdVoucher, quayMayManCount, hangTV} = values
 
         console.log("id, fullName, IdVoucher: ", id, fullName, IdVoucher);
         
                 
         setIsSubmit(true)
-        const res = await updateAccKH(id, fullName, IdVoucher, quayMayManCount)
+        const res = await updateAccKH(id, fullName, IdVoucher, quayMayManCount, hangTV)
 
         if(res){
             message.success(res.message);
@@ -128,7 +130,7 @@ const Update = (props) => {
                             </Form.Item>
                         </Col>
 
-                        <Col span={24} md={24} sm={24} xs={24}>
+                        <Col span={12} md={12} sm={24} xs={24}>
                             <Form.Item
                                 hasFeedback
                                 layout="vertical"
@@ -145,7 +147,7 @@ const Update = (props) => {
                             </Form.Item>
                         </Col> 
 
-                        <Col span={24} md={24} sm={24} xs={24}>
+                        <Col span={12} md={12} sm={24} xs={24}>
                             <Form.Item
                                 hasFeedback
                                 layout="vertical"
@@ -193,6 +195,36 @@ const Update = (props) => {
                                 ]}                              
                             >
                             <InputNumber style={{width: "100%"}} min={0} max={100} />
+                            </Form.Item>
+                        </Col>
+
+                        <Col span={24} md={24} sm={24} xs={24}>
+                            <Form.Item
+                                hasFeedback
+                                layout="vertical"
+                                label="Hạng thành viên"
+                                name="hangTV"    
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Vui lòng nhập đầy đủ thông tin!',
+                                    },
+                                ]}                              
+                            >
+                                <Select placeholder="Chọn hạng thành viên" allowClear>
+                                    <Select.Option value="Bạc">
+                                        <FaTrophy size={20} style={{ color: "#CD7F32", marginRight: 8 }} /> Hạng Bạc
+                                    </Select.Option>
+                                    <Select.Option value="Vàng">
+                                        <FaCrown size={20} style={{ color: "gold", marginRight: 8 }} /> Hạng Vàng
+                                    </Select.Option>
+                                    <Select.Option value="Bạch Kim">
+                                        <FaStar size={20} style={{ color: "#E5E4E2", marginRight: 8 }} /> Hạng Bạch Kim
+                                    </Select.Option>
+                                    <Select.Option value="Kim Cương">
+                                        <IoDiamondSharp size={20} style={{ color: "#00BFFF", marginRight: 8 }} /> Hạng Kim Cương
+                                    </Select.Option>
+                                </Select>
                             </Form.Item>
                         </Col>
 

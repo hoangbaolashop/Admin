@@ -9,9 +9,9 @@ export const deleteAccKH= (id) => {
     return axios.delete(`/api/acckh/delete-kh/${id}`)
 }
 
-export const updateAccKH= (id, fullName, IdVoucher, quayMayManCount) => {
+export const updateAccKH= (id, fullName, IdVoucher, quayMayManCount, hangTV) => {
     return axios.put('/api/acckh/update-kh', {
-        id, fullName, IdVoucher, quayMayManCount
+        id, fullName, IdVoucher, quayMayManCount, hangTV
     })
 }
 

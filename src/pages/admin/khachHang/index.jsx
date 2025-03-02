@@ -109,21 +109,25 @@ const KhachHangPage = () => {
             width: 180
         }, 
         {
-            title: 'Họ Và Tên',
+            title: 'Họ Tên và SĐT',
             dataIndex: 'fullName',
             key: 'fullName',
             render: (text, record) => <div>
-                <a>{record?.fullName}</a>                
+                <a>{record?.fullName}</a>  <br/>           
+                <a>{record?.phone}</a>                
                 </div>,
             width: 150
         }, 
         {
-            title: 'Phone',
-            dataIndex: 'phone',
-            key: 'phone',
-            render: (text) => <a>{text}</a>,
-            width: 100
-        }, 
+            title: 'Tổng doanh thu & Hạng thành viên',
+            dataIndex: 'doanhThukh',
+            key: 'doanhThukh',
+            render: (text, record) => <div>
+                <strong>Tổng đơn hàng: </strong> <span>{record?.soLuongDonThanhCong}</span> đơn hàng <br/>
+                <strong>Tổng doanh thu: </strong> <span style={{color: "red"}}>{record?.tongDoanhThuThanhCong}</span> <br/>
+                <strong>Hạng thành viên: </strong> <span style={{color: "green"}}>{record?.hangTV || 'Bạc'}</span>
+            </div>,
+        },        
         {
             title: 'Mã Giảm Giá',
             dataIndex: 'IdVoucher',
@@ -157,17 +161,17 @@ const KhachHangPage = () => {
         //     ),
         //     // width: 100
         // }, 
-        {
-            title: 'Trạng thái',
-            dataIndex: 'isActive',
-            key: 'isActive',
-            render: (text, record) => (
-                <a>
-                    {text ? <Tag color="success">Đang hoạt động</Tag> : <Tag color="error">Đang bị khóa</Tag>}
-                </a>                
-            ),
-            // width: 150
-        },          
+        // {
+        //     title: 'Trạng thái',
+        //     dataIndex: 'isActive',
+        //     key: 'isActive',
+        //     render: (text, record) => (
+        //         <a>
+        //             {text ? <Tag color="success">Đang hoạt động</Tag> : <Tag color="error">Đang bị khóa</Tag>}
+        //         </a>                
+        //     ),
+        //     // width: 150
+        // },          
         {
           title: 'Chức năng',
           key: 'action',
