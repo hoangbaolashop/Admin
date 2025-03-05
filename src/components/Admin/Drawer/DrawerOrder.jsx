@@ -114,6 +114,7 @@ const DrawerOrder = (props) => {
                         <p style={{fontSize: "18px"}}>Tổng tiền: <span style={{color: "navy"}}>{Math.round(dataDetailOrder?.thanhTien).toLocaleString()}đ</span></p>
                         <p style={{fontSize: "18px"}}>Giảm giá: <span style={{color: "red"}}>{Math.round(dataDetailOrder?.soTienGiamGia).toLocaleString()}đ</span></p>
                         <p style={{fontSize: "18px"}}>Cần thanh toán: <span style={{color: "red"}}>{Math.round(dataDetailOrder?.soTienCanThanhToan).toLocaleString()}đ</span></p>
+                        <p style={{fontSize: "18px"}}>Ghi chú: <span style={{color: "red"}}>{dataDetailOrder?.note}</span></p>
                     </div>
                 </Col>
             </Row>                

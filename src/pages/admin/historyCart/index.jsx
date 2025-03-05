@@ -194,6 +194,7 @@ const HistoryCart = () => {
                         <p>Tổng tiền: <span style={{color: "navy"}}>{Math.round(record.thanhTien).toLocaleString()}đ</span></p>
                         <p>Giảm giá: <span style={{color: "red"}}>{Math.round(record.soTienGiamGia).toLocaleString()}đ</span></p>
                         <p>Cần thanh toán: <span style={{color: "red"}}>{Math.round(record.soTienCanThanhToan).toLocaleString()}đ</span></p>
+                        <p>Ghi chú: <span style={{color: "red"}}>{record?.note}</span></p>
                     </div>
                 )
             }
